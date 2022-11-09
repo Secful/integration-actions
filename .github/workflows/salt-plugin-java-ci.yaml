@@ -29,5 +29,4 @@ jobs:
         if: always()
         run: mvn -B test --file pom.xml
       - name: Build
-        if: always()
         run: mvn -B package -DskipTests --file pom.xml
