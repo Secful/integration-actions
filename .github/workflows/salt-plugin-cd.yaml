@@ -1,0 +1,12 @@
+name: Salt Security Plugin CD
+
+on: [workflow_call]
+      
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest

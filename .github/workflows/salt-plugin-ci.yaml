@@ -1,4 +1,4 @@
-name: Salt Plugin Java CI
+name: Salt Security Plugin CI
 
 on: [workflow_call]
       
