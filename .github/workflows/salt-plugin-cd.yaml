@@ -13,8 +13,10 @@ on:
         required: true
       AWS_BUCKET:
         required: true
+        type: string
       AWS_REGION:
         required: true
+        type: string
       
 defaults:
   run:
@@ -25,12 +27,14 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Downloading build from cache
+        uses: actions/download-artifact@v3
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
           if-no-files-found: error
-      - uses: zdurham/s3-upload-github-action@master
+      - Uploading to S3
+        uses: zdurham/s3-upload-github-action@master
         if: success()
         env:
           FILE: dist/${{ inputs.file_name }}
