@@ -13,7 +13,7 @@ on:
         required: true
       AWS_BUCKET:
         required: true
-      DESTINATION_DIR:
+      AWS_REGION:
         required: true
       
 defaults:
@@ -29,15 +29,15 @@ jobs:
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
-      - uses: shallwefootball/s3-upload-action@master
-        name: Upload S3
-        id: S3
+          if-no-files-found: error
+      - uses: zdurham/s3-upload-github-action@master
         if: success()
-        with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
-          source_dir: dist/${{ inputs.file_name }}
-          destination_dir: ${{ secrets.DESTINATION_DIR }}
+        env:
+          FILE: dist/${{ inputs.file_name }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          S3_BUCKET: ${{ secrets.AWS_BUCKET }}
+          S3_KEY: ${{ inputs.file_name }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AOT_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AOT_SECRET_ACCESS_KEY}}
 
     
