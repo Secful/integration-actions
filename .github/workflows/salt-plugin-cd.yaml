@@ -29,7 +29,6 @@ jobs:
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
-          if-no-files-found: error
       - uses: shallwefootball/s3-upload-action@master
         name: Upload S3
         id: S3
