@@ -9,16 +9,12 @@ on:
     secrets:
       AWS_KEY_ID:
         required: true
-        type: string
       AWS_SECRET_ACCESS_KEY:
         required: true
-        type: string
       AWS_BUCKET:
         required: true
-        type: string
       DESTINATION_DIR:
         required: true
-        type: string
       
 defaults:
   run:
