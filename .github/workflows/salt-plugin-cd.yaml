@@ -13,10 +13,8 @@ on:
         required: true
       AWS_BUCKET:
         required: true
-        type: string
       AWS_REGION:
         required: true
-        type: string
       
 defaults:
   run:
