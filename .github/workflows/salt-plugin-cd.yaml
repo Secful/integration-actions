@@ -32,7 +32,7 @@ jobs:
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
-      - Uploading to S3
+      - name: Uploading to S3
         uses: zdurham/s3-upload-github-action@master
         if: success()
         env:
