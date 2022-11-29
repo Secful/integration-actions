@@ -6,6 +6,19 @@ on:
       file_name:
         required: true
         type: string
+    secrets:
+      AWS_KEY_ID:
+        required: true
+        type: string
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+        type: string
+      AWS_BUCKET:
+        required: true
+        type: string
+      DESTINATION_DIR:
+        required: true
+        type: string
       
 defaults:
   run:
@@ -20,8 +33,16 @@ jobs:
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
-      - name: print
-        run: |
-          echo "${{ inputs.file_name }}"
+          if-no-files-found: error
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload S3
+        id: S3
+        if: success()
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: dist/${{ inputs.file_name }}
+          destination_dir: ${{ secrets.DESTINATION_DIR }}
 
     
