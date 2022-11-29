@@ -8,5 +8,15 @@ defaults:
     working-directory: ./
     
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: latest-build
+          path: dist/${{ inputs.file_name }}
+      - name: print
+        run: |
+          echo "${{ inputs.file_name }}"
+
+    
