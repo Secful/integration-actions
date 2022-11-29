@@ -32,7 +32,6 @@ jobs:
         with:
           name: latest-build
           path: dist/${{ inputs.file_name }}
-          if-no-files-found: error
       - Uploading to S3
         uses: zdurham/s3-upload-github-action@master
         if: success()
