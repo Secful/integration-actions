@@ -1,6 +1,11 @@
 name: Salt Security Plugin CD
 
-on: [workflow_call]
+on: 
+  workflow_call:
+    inputs:
+      file_name:
+        required: true
+        type: string
       
 defaults:
   run:
