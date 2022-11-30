@@ -45,8 +45,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: test@gmail.com
-          password: 123456
+          username: notificationgithubactions@gmail.com
+          password: 1z@X3c$v5
           subject: Github Actions job result
           to: shibincse@gmail.com
           from: noreply@gmail.com
