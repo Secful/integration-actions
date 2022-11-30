@@ -17,6 +17,7 @@ on:
         required: true
       MAIL_USERNAME:
       MAIL_PASSWORD:
+      TO_LIST:
       
       
 defaults:
@@ -52,7 +53,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: New Build uploaded
-          to: shibincse@gmail.com, shibin.thomas@aot-technologies.com
+          to: ${{ secrets.TO_LIST }}
           from: notificationgithubactions
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
        
