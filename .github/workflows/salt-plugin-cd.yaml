@@ -31,7 +31,7 @@ jobs:
       - name: Downloading build from cache
         uses: actions/download-artifact@v3
         with:
-          name: build-file
+          name: latest-build
           path: ${{ inputs.path }}
       - name: Uploading to S3
         uses: zdurham/s3-upload-github-action@master
