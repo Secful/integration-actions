@@ -15,6 +15,9 @@ on:
         required: true
       AWS_REGION:
         required: true
+      MAIL_USERNAME:
+      MAIL_PASSWORD:
+      
       
 defaults:
   run:
@@ -46,9 +49,9 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: notificationgithubactions@gmail.com
-          password: egotjzssvfvnjwkt
-          subject: Github Actions job result
+          username: {{ secrets.MAIL_USERNAME }}
+          password: {{ secrets.MAIL_PASSWORD }}
+          subject: New Build uploaded
           to: shibincse@gmail.com
           from: notificationgithubactions
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
