@@ -31,11 +31,16 @@ jobs:
           name: latest-build
           path: dist
       - name: Upload build to s3
-        uses: shallwefootball/s3-upload-action@master
+        uses: hkusu/s3-upload-action@v2
+        id: upload
         with:
-          aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.S3_BUCKET }}
-          source_dir: dist
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-bucket: ${{ secrets.S3_BUCKET }}
+          file-path: dist/${{ inputs.filename }}
+          output-file-url: 'true'
+      - name: Show URL
+        run: echo '${{ steps.upload.outputs.file-url }}'
 
     
