@@ -57,6 +57,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: New Build uploaded
+          to: ${{ secrets.MAIL_USERNAME }}
           bcc: ${{ inputs.to_list }}
           from: noReply
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
