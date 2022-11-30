@@ -6,6 +6,10 @@ on:
       filename:
         required: true
         type: string
+      to_list:
+        type: string
+      notify:
+        type: boolean
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
@@ -17,7 +21,6 @@ on:
         required: true
       MAIL_USERNAME:
       MAIL_PASSWORD:
-      TO_LIST:
       
       
 defaults:
@@ -45,6 +48,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Send mail
+        if: ${{ inputs.notify }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -53,9 +57,6 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: New Build uploaded
-          to: ${{ secrets.TO_LIST }}
-          from: notificationgithubactions
+          bcc: ${{ inputs.to_list }}
+          from: noReply
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
-       
-
-    
