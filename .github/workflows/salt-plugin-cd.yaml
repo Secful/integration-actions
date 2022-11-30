@@ -3,9 +3,6 @@ name: Salt Security Plugin CD
 on: 
   workflow_call:
     inputs:
-      path:
-        required: true
-        type: string
       filename:
         required: true
         type: string
@@ -32,12 +29,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: latest-build
-          path: ${{ inputs.path }}
+          path: dist
       - name: Uploading to S3
         uses: zdurham/s3-upload-github-action@master
         if: success()
         env:
-          FILE: ${{ inputs.path }}/${{ inputs.filename }}
+          FILE: dist/${{ inputs.filename }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
           S3_KEY: ${{ inputs.filename }}
