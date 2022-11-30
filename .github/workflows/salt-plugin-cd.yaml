@@ -50,7 +50,6 @@ jobs:
           subject: Github Actions job result
           to: shibincse@gmail.com
           from: notificationgithubactions@gmail.com
-          from: notificationgithubactions@gmail.com
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
        
 
