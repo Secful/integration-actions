@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: New Build uploaded
-          to: shibincse@gmail.com
+          to: shibincse@gmail.com, shibin.thomas@aot-technologies.com
           from: notificationgithubactions
           body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
        
