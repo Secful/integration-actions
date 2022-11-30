@@ -6,6 +6,9 @@ on:
       filename:
         required: true
         type: string
+      notify:
+        required: false
+        type: boolean
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
@@ -15,6 +18,10 @@ on:
         required: true
       AWS_REGION:
         required: true
+      MAIL_USERNAME:
+        required: false
+      MAIL_PASSWORD:
+        required: false
       
 defaults:
   run:
@@ -40,5 +47,19 @@ jobs:
           S3_KEY: ${{ inputs.filename }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Send mail
+        if: |
+          ${{ success() }} && ( ${{ inputs.notify }} || false )
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          to: shibincse@gmail.com
+          from: noreply@gmail.com
+          body: Build job of ${{github.repository}} completed successfully & File ${{ inputs.filename }} uploaded to s3 bucket ${{ secrets.S3_BUCKET }}.
+       
 
     
