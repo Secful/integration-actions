@@ -22,11 +22,6 @@ on:
       MAIL_USERNAME:
       MAIL_PASSWORD:
       
-      
-defaults:
-  run:
-    shell: bash
-    working-directory: ./
     
 jobs:
   upload:
