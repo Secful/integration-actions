@@ -2,10 +2,6 @@ name: Salt Security Plugin CI
 
 on: [workflow_call]
       
-defaults:
-  run:
-    shell: bash
-    working-directory: ./
     
 jobs:
   build:
