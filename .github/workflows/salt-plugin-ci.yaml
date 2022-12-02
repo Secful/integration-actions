@@ -1,12 +1,16 @@
 name: Salt Security Plugin CI
 
-on: [workflow_call]
+on: 
+  workflow_call:
+    inputs:
+      buildDir:
+        required: false
+        type: string
       
     
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -14,6 +18,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Change Working directory
+        if: ${{inputs.buildDir != ''}}
+        run: cd ${{inputs.buildDir}}
       - name: Cache Maven packages
         if: always()
         uses: actions/cache@v3
