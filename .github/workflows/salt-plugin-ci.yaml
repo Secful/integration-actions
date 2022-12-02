@@ -28,7 +28,8 @@ jobs:
       - name: Test
         if: always()
         run: |
-          echo "${{inputs.buildDir}}"
+          echo "${{inputs.buildDir == null}}"
+          echo "${{inputs.buildDir == ""}}"
           if [ ${{inputs.buildDir != ''}} ]; then
             cd ${{inputs.buildDir}}
           fi
