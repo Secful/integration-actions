@@ -33,14 +33,10 @@ jobs:
       - name: Test
         if: always()
         run: |
-          if [ ${{inputs.buildDir != ''}} ]; then
-            cd ${{inputs.buildDir}}
-          fi
+          cd ${{inputs.buildDir || ./}}
           mvn -B test --file pom.xml
       - name: Build
         if: always()
         run: |
-          if [ ${{inputs.buildDir != ''}} ]; then
-            cd ${{inputs.buildDir}}
-          fi
+          cd ${{inputs.buildDir || ./}}
           mvn -B package -DskipTests --file pom.xml
