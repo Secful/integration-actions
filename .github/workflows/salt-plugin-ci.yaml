@@ -32,7 +32,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Test
         if: always()
-        run: cd ${{inputs.buildDir}} || . && mvn -B test --file pom.xml
+        run: cd ${{inputs.buildDir}} && mvn -B test --file pom.xml
       - name: Build
         if: always()
-        run: cd ${{inputs.buildDir}} || . && mvn -B package -DskipTests --file pom.xml
+        run: cd ${{inputs.buildDir}} && mvn -B package -DskipTests --file pom.xml
