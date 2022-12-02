@@ -5,6 +5,8 @@ on:
     inputs:
       buildDir:
         default: ./
+        required: false
+        type: string
         
 defaults:
   run:
